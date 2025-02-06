@@ -65,41 +65,59 @@ class JanusProImageGenerator:
         return (self._images_to_tensor(images),)
 
     def _generate_tokens(self, model, processor, prompt, parallel_size, cfg_scale, temperature, image_size):
+        # 编码输入提示
         input_ids = processor.tokenizer.encode(prompt)
         input_ids = torch.LongTensor(input_ids).to(model.device)
         
-        tokens = torch.zeros((parallel_size*2, len(input_ids)), dtype=torch.long, device=model.device)
+        # 初始化输入张量
+        batch_size = parallel_size * 2
+        tokens = torch.zeros((batch_size, len(input_ids)), dtype=torch.long, device=model.device)
         tokens[:, :] = input_ids
-        tokens[1::2, 1:-1] = processor.pad_id
+        tokens[1::2, 1:-1] = processor.pad_id  # 无分类器引导的空输入
 
-        image_token_num = (image_size // 16)**2 * 3
+        # 计算图像token数量
+        patch_size = 16
+        image_token_num = (image_size // patch_size) ** 2 * 3
+
+        # 初始化生成结果
         generated_tokens = torch.zeros((parallel_size, image_token_num), dtype=torch.long, device=model.device)
-        
+
+        # 生成循环
         with torch.no_grad():
+            # 获取输入嵌入
             inputs_embeds = model.language_model.get_input_embeddings()(tokens)
+            
+            # 初始化缓存
             past_key_values = None
             
             for i in range(image_token_num):
+                # 前向传播
                 outputs = model.language_model.model(
                     inputs_embeds=inputs_embeds,
                     use_cache=True,
                     past_key_values=past_key_values
                 )
+                
+                # 更新缓存
                 past_key_values = outputs.past_key_values
                 
+                # 获取logits
                 logits = model.gen_head(outputs.last_hidden_state[:, -1, :])
-                logit_cond = logits[0::2]
-                logit_uncond = logits[1::2]
+                
+                # 分类器自由引导
+                logit_cond = logits[0::2]  # 条件logits
+                logit_uncond = logits[1::2]  # 无条件logits
                 
                 logits = logit_uncond + cfg_scale * (logit_cond - logit_uncond)
                 probs = torch.softmax(logits / temperature, dim=-1)
                 
+                # 采样下一个token
                 next_token = torch.multinomial(probs, 1)
                 generated_tokens[:, i] = next_token.squeeze()
                 
-                img_embeds = model.prepare_gen_img_embeds(
-                    torch.cat([next_token, next_token], dim=0)
-                )
+                # 准备下一轮输入
+                next_token = torch.cat([next_token, next_token], dim=0)  # 条件 + 无条件
+                img_embeds = model.prepare_gen_img_embeds(next_token)
                 inputs_embeds = img_embeds.unsqueeze(1)
 
         return generated_tokens
