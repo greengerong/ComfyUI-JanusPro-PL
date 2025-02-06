@@ -1,6 +1,5 @@
 
 
-本项目仅测试deepseek生成能力，仍然在开发中
 ---
 [中文版](./README-ZH.md)
 
@@ -26,28 +25,34 @@ This plugin integrates the **Janus-Pro** multi-modal model into ComfyUI, enablin
 
 ### 1. Install Dependencies
 
-Ensure you have the required dependencies installed:
+1:clone to  ComfyUI `custom_nodes` directory
+2: Ensure you have the required dependencies installed:
 
 ```bash
+git clone https://github.com/greengerong/ComfyUI-JanusPro-PL
 pip install -r requirements.txt
 ```
 
-### 2. Install the Plugin
-
-Copy the `JanusPro` folder to your ComfyUI `custom_nodes` directory:
-
-```bash
-cp -r JanusPro /path/to/ComfyUI/custom_nodes/
-```
-
-### 3. Download Models
+### 2. Download Models
 
 The plugin supports the following Janus-Pro models:
 
 - `deepseek-ai/Janus-Pro-1B`
 - `deepseek-ai/Janus-Pro-7B`
 
-Models will be automatically downloaded on first use. Alternatively, you can manually download them and place them in the `models/janus_pro` directory.
+Models will be automatically downloaded on first use. Alternatively, you can manually download them and place them in the`models/Janus-Pro` directory.
+
+#### Manually deploy file directories
+
+```
+models/Janus-Pro/
+├── Janus-Pro-7B/
+│   ├── config.json
+│   ├── pytorch_model.bin
+│   └── ...
+└── Janus-Pro-1B/
+    └── ...
+```
 
 ---
 
@@ -74,52 +79,7 @@ Models will be automatically downloaded on first use. Alternatively, you can man
 ### Example Workflow
 
 Below is an example workflow that combines image understanding and text-to-image generation:
-
-```json
-{
-  "nodes": [
-    {
-      "type": "JanusProModelLoader",
-      "name": "Model Loader",
-      "model_name": "deepseek-ai/Janus-Pro-7B",
-      "precision": "bf16"
-    },
-    {
-      "type": "LoadImage",
-      "name": "Input Image"
-    },
-    {
-      "type": "JanusProImageUnderstanding",
-      "name": "Image Analyzer",
-      "question": "Describe this scene in detail for image generation",
-      "max_tokens": 512
-    },
-    {
-      "type": "JanusProImageGenerator",
-      "name": "Image Generator",
-      "temperature": 0.7,
-      "cfg_scale": 7.5,
-      "parallel_size": 4,
-      "image_size": "384",
-      "seed": 42
-    },
-    {
-      "type": "PreviewImage",
-      "name": "Result Preview"
-    }
-  ],
-  "links": [
-    ["Model Loader", 0, "Image Analyzer", 0],
-    ["Model Loader", 1, "Image Analyzer", 1],
-    ["Model Loader", 0, "Image Generator", 0],
-    ["Model Loader", 1, "Image Generator", 1],
-    ["Input Image", 0, "Image Analyzer", 2],
-    ["Image Analyzer", 0, "Image Generator", 2],
-    ["Image Generator", 0, "Result Preview", 0]
-  ]
-}
-```
-
+![](./workflows/workflow.png)
 ---
 
 ### Parameter Guide
@@ -196,7 +156,3 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 ## Contact
 
 For questions or feedback, please open an issue on GitHub or contact the maintainers.
-
----
-
-This `README.md` provides a comprehensive guide for users to install, configure, and use the Janus-Pro ComfyUI plugin. It includes detailed instructions, example workflows, and troubleshooting tips to ensure a smooth user experience.
