@@ -1,0 +1,6 @@
+janus-ai
+transformers
+torch
+bitsandbytes
+Pillow
+numpy
