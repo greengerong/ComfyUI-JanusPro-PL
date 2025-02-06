@@ -15,7 +15,7 @@ class JanusProModelLoader:
                     {"default": "deepseek-ai/Janus-Pro-7B"}
                 ),
                 "precision": (
-                    ["fp32", "fp16", "bf16", "int8", "int4"],
+                    ["bf16", "int8", "int4"],
                     {"default": "bf16"}
                 ),
             },
