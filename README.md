@@ -15,7 +15,7 @@ This plugin integrates the **Janus-Pro** multi-modal model into ComfyUI, enablin
 
 - **Multi-Modal Understanding**: Analyze images and generate detailed descriptions.
 - **Text-to-Image Generation**: Create high-quality images from text prompts.
-- **Flexible Configuration**: Supports 1B and 7B model sizes with multiple precision options (FP32, FP16, BF16, INT8, INT4).
+- **Flexible Configuration**: Supports 1B and 7B model sizes with multiple precision options (BF16, INT8, INT4).
 - **ComfyUI Integration**: Seamlessly integrates with ComfyUI workflows.
 - **Batch Processing**: Generate multiple images in parallel for efficient workflows.
 
@@ -86,7 +86,7 @@ Below is an example workflow that combines image understanding and text-to-image
 
 #### JanusProModelLoader
 - **Model Name**: Choose between `Janus-Pro-1B` and `Janus-Pro-7B`.
-- **Precision**: Select from `FP32`, `FP16`, `BF16`, `INT8`, or `INT4`.
+- **Precision**: Select from `BF16`, `INT8`, or `INT4`.
 - **Cache Directory**: Directory to store downloaded models (default: `models/Janus-Pro`).
 
 #### JanusProImageUnderstanding

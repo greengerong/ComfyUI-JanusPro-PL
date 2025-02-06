@@ -13,7 +13,7 @@
 
 - **多模态理解**: 解析图像并生成详细描述
 - **文生图生成**: 根据文本提示生成高质量图像
-- **灵活配置**: 支持 1B/7B 模型尺寸及多种精度（FP32/FP16/BF16/INT8/INT4）
+- **灵活配置**: 支持 1B/7B 模型尺寸及多种精度（BF16/INT8/INT4）
 - **ComfyUI 集成**: 无缝对接节点式工作流
 - **批量生成**: 并行生成多张图像提升效率
 
@@ -86,7 +86,7 @@ models/Janus-Pro/
 
 #### JanusProModelLoader
 - **模型名称**: 选择 `Janus-Pro-1B` 或 `Janus-Pro-7B`
-- **计算精度**: 可选 FP32/FP16/BF16/INT8/INT4
+- **计算精度**: 可选 BF16/INT8/INT4
 - **本地目录**: 模型存储路径（默认: `models/Janus-Pro`）
 
 #### JanusProImageUnderstanding
