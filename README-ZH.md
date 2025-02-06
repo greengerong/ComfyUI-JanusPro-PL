@@ -23,8 +23,8 @@
 
 ### 1. 安装依赖
 
-1: ComfyUI 的 `custom_nodes` 目录下安装插件
-2:确保已安装所需依赖库：
+- ComfyUI 的 `custom_nodes` 目录下安装插件
+- 确保已安装所需依赖库：
 
 ```bash
 git clone https://github.com/greengerong/ComfyUI-JanusPro-PL
@@ -137,12 +137,6 @@ models/Janus-Pro/
    - 提高 `CFG 权重`
    - 使用更详细的提示词
    - 调整 `温度系数`（低值更稳定）
-
----
-
-## 许可协议
-
-本项目采用 **Apache 2.0 许可证**，详见 [LICENSE](LICENSE) 文件。
 
 ---
 

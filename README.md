@@ -25,8 +25,8 @@ This plugin integrates the **Janus-Pro** multi-modal model into ComfyUI, enablin
 
 ### 1. Install Dependencies
 
-1:clone to  ComfyUI `custom_nodes` directory
-2: Ensure you have the required dependencies installed:
+- clone to  ComfyUI `custom_nodes` directory
+- Ensure you have the required dependencies installed:
 
 ```bash
 git clone https://github.com/greengerong/ComfyUI-JanusPro-PL
@@ -40,7 +40,7 @@ The plugin supports the following Janus-Pro models:
 - `deepseek-ai/Janus-Pro-1B`
 - `deepseek-ai/Janus-Pro-7B`
 
-Models will be automatically downloaded on first use. Alternatively, you can manually download them and place them in the`models/Janus-Pro` directory.
+Models will be automatically downloaded on first use. Alternatively, you can manually download them and place them in the `models/Janus-Pro` directory.
 
 #### Manually deploy file directories
 
@@ -87,7 +87,7 @@ Below is an example workflow that combines image understanding and text-to-image
 #### JanusProModelLoader
 - **Model Name**: Choose between `Janus-Pro-1B` and `Janus-Pro-7B`.
 - **Precision**: Select from `FP32`, `FP16`, `BF16`, `INT8`, or `INT4`.
-- **Cache Directory**: Directory to store downloaded models (default: `models/janus_pro`).
+- **Cache Directory**: Directory to store downloaded models (default: `models/Janus-Pro`).
 
 #### JanusProImageUnderstanding
 - **Image**: Input image to analyze.
@@ -137,12 +137,6 @@ Below is an example workflow that combines image understanding and text-to-image
    - Increase `CFG Scale`.
    - Use more descriptive prompts.
    - Adjust `temperature` (lower values for more deterministic results).
-
----
-
-## License
-
-This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
