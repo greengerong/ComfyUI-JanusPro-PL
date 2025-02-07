@@ -29,7 +29,7 @@ This plugin integrates the **Janus-Pro** multi-modal model into ComfyUI, enablin
 - Ensure you have the required dependencies installed:
 
 ```bash
-git clone https://github.com/greengerong/ComfyUI-JanusPro-PL
+git clone https://github.com/greengerong/ComfyUI-JanusPro-PL.git
 pip install -r requirements.txt
 ```
 
@@ -150,3 +150,4 @@ Below is an example workflow that combines image understanding and text-to-image
 ## Contact
 
 For questions or feedback, please open an issue on GitHub or contact the maintainers.
+![](./workflows/logo.jpg)

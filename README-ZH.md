@@ -27,7 +27,7 @@
 - 确保已安装所需依赖库：
 
 ```bash
-git clone https://github.com/greengerong/ComfyUI-JanusPro-PL
+git clone https://github.com/greengerong/ComfyUI-JanusPro-PL.git
 pip install -r requirements.txt
 ```
 
@@ -150,3 +150,4 @@ models/Janus-Pro/
 ## 联系我们
 
 如有问题或建议，请在 GitHub 提交 issue 或联系维护者。
+![](./workflows/logo.jpg)
