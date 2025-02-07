@@ -79,7 +79,9 @@ models/Janus-Pro/
 ### Example Workflow
 
 Below is an example workflow that combines image understanding and text-to-image generation:
+
 ![](./workflows/workflow.png)
+
 ---
 
 ### Parameter Guide
