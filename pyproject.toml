@@ -1,0 +1,15 @@
+[project]
+name = "januspro-pl"
+description = "This plugin integrates the Janus-Pro multi-modal model into ComfyUI, enabling advanced image understanding and text-to-image generation capabilities. It supports both image analysis and creative image generation workflows."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["git+https://github.com/deepseek-ai/Janus.git", "transformers", "torch", "bitsandbytes", "Pillow", "numpy"]
+
+[project.urls]
+Repository = "https://github.com/greengerong/ComfyUI-JanusPro-PL"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-JanusPro-PL"
+Icon = ""
